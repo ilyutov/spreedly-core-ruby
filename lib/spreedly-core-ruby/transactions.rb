@@ -106,6 +106,7 @@ module SpreedlyCore
 
   class AuthorizeTransaction < Transaction
     include HasIpAddress
+    include NullifiableTransaction
 
     handles "Authorization"
     attr_reader :payment_method
