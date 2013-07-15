@@ -56,5 +56,11 @@ module SpreedlyCore
     def ==(other)
       self.token == other.token
     end
+    # Redact the payment method
+    def redact
+      self.class.verify_put("/gateways/#{token}/redact.xml", :body => {}, :has_key => "transaction") do |response|
+        RedactTransaction.new(response.parsed_response["transaction"])
+      end
+    end
   end
 end
