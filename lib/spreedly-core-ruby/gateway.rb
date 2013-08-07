@@ -13,8 +13,10 @@ module SpreedlyCore
     end
 
     # returns an array of all the Gateways owned by the account
-    def self.all
-      verify_get("/gateways.xml") do |response|
+    def self.all(since_token = nil)
+      gateways_url = "/gateways.xml"
+      gateways_url += "?since_token=#{since_token}" if since_token
+      verify_get(gateways_url) do |response|
         # will return Hash if only 1 gateways->gateway, Array otherwise
         gateways =  begin
                       response.parsed_response["gateways"]["gateway"]
