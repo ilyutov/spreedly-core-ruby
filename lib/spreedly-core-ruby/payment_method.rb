@@ -129,7 +129,8 @@ module SpreedlyCore
           :currency_code => currency,
           :ip => options[:ip_address],
           :redirect_url => options[:redirect_url],
-          :callback_url => options[:callback_url]
+          :callback_url => options[:callback_url],
+          :merchant_name_descriptor => options[:merchant_name_descriptor]
         }
       }
       self.class.verify_post(path, :body => data,
