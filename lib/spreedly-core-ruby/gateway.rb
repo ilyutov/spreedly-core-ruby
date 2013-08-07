@@ -33,6 +33,15 @@ module SpreedlyCore
       return []
     end
 
+    # Lookup the Gateway by token
+    def self.find(token)
+      return nil if token.nil?
+      verify_get("/gateways/#{token}.xml",
+                 :has_key => "gateway") do |response|
+        new(response.parsed_response["gateway"])
+      end
+    end
+
     def self.create(gateway_options)
       raise ArgumentError.new("gateway_options must be a hash") unless gateway_options.is_a?(Hash)
       
