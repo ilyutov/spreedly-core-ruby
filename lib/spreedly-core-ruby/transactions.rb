@@ -52,6 +52,12 @@ module SpreedlyCore
       end.join("|")
       (OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new(signed["algorithm"], SpreedlyCore::Base.secret, data)) == signed["signature"])
     end
+    
+    def transcript
+      verify_get("/transactions/#{self.token}/transcript") do |response|
+        response.body
+      end
+    end
   end
 
   class RetainTransaction < Transaction
