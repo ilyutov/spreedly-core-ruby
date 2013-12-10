@@ -54,7 +54,7 @@ module SpreedlyCore
     end
     
     def transcript
-      verify_get("/transactions/#{self.token}/transcript") do |response|
+      self.class.verify_get("/transactions/#{self.token}/transcript") do |response|
         response.body
       end
     end
